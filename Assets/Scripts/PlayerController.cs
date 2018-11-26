@@ -50,6 +50,10 @@ public class PlayerController : MonoBehaviour
                 rb2d.AddForce(Vector2.up * JUMP_SPEED);
                 IsOnTheGround = false;
             }
+
+            // Save the player if they fall off
+            if (transform.position.y < -10)
+                transform.position = Vector3.zero;
         }           
 	}
 
