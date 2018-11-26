@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+
+    public Text scoreText;
 
     private Rigidbody2D rb2d;
     private const int MOVEMENT_SPEED = 500;
@@ -11,7 +14,8 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnimator;
     private SpriteRenderer playerRenderer;
     private bool IsOnTheGround;
-
+    private int score;
+    
 	// Use this for initialization
 	void Start ()
     {
@@ -35,7 +39,7 @@ public class PlayerController : MonoBehaviour
                 rb2d.AddForce(Vector2.right * xMovement * Time.deltaTime * MOVEMENT_SPEED);
                 playerAnimator.SetBool("Walking", true);
 
-                playerRenderer.flipX = xMovement < 0; // If we are walking left flip the animation
+                playerRenderer.flipX = xMovement < 0; // If we are walking left, flip the animation
             }                        
             else
             {
@@ -53,15 +57,29 @@ public class PlayerController : MonoBehaviour
 
             // Save the player if they fall off
             if (transform.position.y < -10)
+            {
                 transform.position = Vector3.zero;
+
+                // Take away a point for saving them
+                if (score > 0)
+                {
+                    score--;
+                    scoreText.text = "Score: " + score;
+                }
+            }
         }           
 	}
+
+    public void AddToScore(int amount)
+    {
+        score += amount;
+        scoreText.text = "Score: " + score;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
-            IsOnTheGround = true;
-        
+            IsOnTheGround = true;        
     }
 
     private void OnCollisionExit2D(Collision2D collision)
