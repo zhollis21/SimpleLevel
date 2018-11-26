@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4099118164894412}
   - component: {fileID: 2569400267332345162}
   m_Layer: 31
-  m_Name: Grassy Tiles
+  m_Name: Main Spritesheet Tiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
