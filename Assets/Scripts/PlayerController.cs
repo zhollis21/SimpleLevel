@@ -2,19 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
     private Rigidbody2D rb2d;
-    private int SPEED = 500;
+    private const int MOVEMENT_SPEED = 500;
+    private const int JUMP_SPEED = 500;
+    private Animator playerAnimator;
+    private SpriteRenderer playerRenderer;
+    private bool IsOnTheGround;
+
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
 
         rb2d = GetComponent<Rigidbody2D>();
+        playerAnimator = GetComponent<Animator>();
+        playerRenderer = GetComponent<SpriteRenderer>();
 
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		
         if (rb2d != null)
         {
@@ -22,12 +32,41 @@ public class PlayerController : MonoBehaviour {
 
             if (xMovement > .2f || xMovement < -.2f)
             {
-                rb2d.AddForce(Vector2.right * xMovement * Time.deltaTime * SPEED);
+                rb2d.AddForce(Vector2.right * xMovement * Time.deltaTime * MOVEMENT_SPEED);
+                playerAnimator.SetBool("Walking", true);
+
+                playerRenderer.flipX = xMovement < 0; // If we are walking left flip the animation
+            }                        
+            else
+            {
+                playerAnimator.SetBool("Walking", false);
             }
 
-            
-        }
-            
 
+            float jumpMovement = Input.GetAxis("Jump");
+
+            if (jumpMovement > .5 && IsOnTheGround)
+            {
+                rb2d.AddForce(Vector2.up * JUMP_SPEED);
+                IsOnTheGround = false;
+            }
+
+            // Save the player if they fall off
+            if (transform.position.y < -10)
+                transform.position = Vector3.zero;
+        }           
 	}
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+            IsOnTheGround = true;
+        
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+            IsOnTheGround = false;
+    }
 }
