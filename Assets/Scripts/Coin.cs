@@ -9,7 +9,11 @@ public class Coin : MonoBehaviour
     // ToDo: We will probably have this add to a score later
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(gameObject);
+        if (collision.tag == "Player")
+        {
+            collision.SendMessage("AddToScore", 1);
+            Destroy(gameObject);
+        }
     }
 
 }
