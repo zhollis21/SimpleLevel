@@ -5,8 +5,7 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
 
-    // When the player enters the collider of the coin, we destroy it.
-    // ToDo: We will probably have this add to a score later
+    // When the player enters the collider of the coin, we send a score update and destroy the coin.
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
