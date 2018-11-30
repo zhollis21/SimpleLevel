@@ -27,22 +27,32 @@ public class SpikeMan : BaseEnemy
                 currentAction = Actions.Walking;
             }
 
-            enemyRenderer.flipX = playerTransform.position.x < transform.position.x;
-            
-
-            transform.position = new Vector2(Mathf.MoveTowards(transform.position.x, playerTransform.position.x, movementSpeed * Time.deltaTime), transform.position.y);
-            
+            MoveTowards(playerTransform.position, MovementType.Horizontal);            
         }
-        else if (enemyMovementType == MovementPattern.Patrol)
+        else if (enemyMovementType == MovementPattern.Patrol && patrolPoints.Count > 0)
         {
+            if (currentAction != Actions.Walking)
+            {
+                enemyAnimator.SetTrigger("Walk");
+                currentAction = Actions.Walking;
+            }
 
+            MoveTowards(patrolPoints[patrolPointIndex], MovementType.Horizontal);
+
+            // If we are at the destination, lets set the next destination
+            if (Mathf.Abs(patrolPoints[patrolPointIndex].x - transform.position.x) < .1)
+            {
+                patrolPointIndex++;
+
+                // If we just arrived at the last point, start over
+                if (patrolPointIndex == patrolPoints.Count)
+                    patrolPointIndex = 0;
+            }
         }
         else if (currentAction != Actions.Standing)
         {
             enemyAnimator.SetTrigger("Stand");
             currentAction = Actions.Standing;
         }
-
-
-    }
+    }    
 }

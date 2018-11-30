@@ -11,11 +11,13 @@ public class BaseEnemy : MonoBehaviour
     public float movementSpeed;
 
     public enum MovementPattern { Chase, Patrol, Stay }
+    public enum MovementType { Horizontal, Vertical, Both }
 
     protected CircleCollider2D chaseRangeCollider; //This is used to detect when the player is near 
     protected Transform playerTransform;
     protected Animator enemyAnimator;
     protected SpriteRenderer enemyRenderer;
+    protected int patrolPointIndex = 0;
 
     // Use this for initialization
     protected virtual void Start()
@@ -60,4 +62,18 @@ public class BaseEnemy : MonoBehaviour
         }
     }
 
+    // Moves the player toward the destination based on their movement speed and movement type
+    protected void MoveTowards(Vector2 destination, MovementType movementType)
+    {
+        enemyRenderer.flipX = destination.x < transform.position.x;
+
+        if (movementType == MovementType.Horizontal) // Only changes x value
+            transform.position = new Vector2(Mathf.MoveTowards(transform.position.x, destination.x, movementSpeed * Time.deltaTime), transform.position.y);
+
+        else if (movementType == MovementType.Vertical) // Only changes y value
+            transform.position = new Vector2(transform.position.x, Mathf.MoveTowards(transform.position.y, destination.y, movementSpeed * Time.deltaTime));
+
+        else // Changes both x and y value
+            transform.position = Vector2.MoveTowards(transform.position, destination, movementSpeed * Time.deltaTime);
+    }
 }

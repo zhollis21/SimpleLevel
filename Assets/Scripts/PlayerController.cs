@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         if (rb2d != null)
         {
             // Handle Horizontal Movement
-            float xMovement = Input.GetAxis("Horizontal");
+            float xMovement = Input.GetAxisRaw("Horizontal");
 
             if (xMovement > .2f || xMovement < -.2f)
             {
@@ -44,6 +44,9 @@ public class PlayerController : MonoBehaviour
             else
             {
                 playerAnimator.SetBool("Walking", false);
+                
+                if (IsOnTheGround) // Stop the player from sliding on the ground
+                    rb2d.velocity = Vector2.up * rb2d.velocity.y;
             }
 
 
