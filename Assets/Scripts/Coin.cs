@@ -10,7 +10,7 @@ public class Coin : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            collision.SendMessage("AddToScore", 1);
+            GameManager.instance.AddToScore(1);
             Destroy(gameObject);
         }
     }

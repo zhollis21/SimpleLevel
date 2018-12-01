@@ -10,7 +10,7 @@ public class BaseEnemy : MonoBehaviour
     public float chaseDistance;
     public float movementSpeed;
 
-    public enum MovementPattern { Chase, Patrol, Stay }
+    public enum MovementPattern { Chase, Patrol, PatrolAndChase, Stay }
     public enum MovementType { Horizontal, Vertical, Both }
 
     protected CircleCollider2D chaseRangeCollider; //This is used to detect when the player is near 
@@ -23,7 +23,7 @@ public class BaseEnemy : MonoBehaviour
     protected virtual void Start()
     {
         // If we are supposed to chase the player we create a trigger around the enemy to detect the player in the radius distance
-        if (enemyMovementType == MovementPattern.Chase)
+        if (enemyMovementType == MovementPattern.Chase || enemyMovementType == MovementPattern.PatrolAndChase)
         {
             chaseRangeCollider = gameObject.AddComponent<CircleCollider2D>();
 
@@ -39,6 +39,10 @@ public class BaseEnemy : MonoBehaviour
         if (enemyMovementType == MovementPattern.Patrol && patrolPoints.Count < 1)
             enemyMovementType = MovementPattern.Stay;
 
+        // If the enemy is set to Patrol and Chase, but has no patrol points, we set it to just chase
+        if (enemyMovementType == MovementPattern.PatrolAndChase && patrolPoints.Count < 1)
+            enemyMovementType = MovementPattern.Chase;
+
         enemyAnimator = GetComponent<Animator>();
         enemyRenderer = GetComponent<SpriteRenderer>();
 
@@ -47,7 +51,7 @@ public class BaseEnemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // If the player has hit our trigger and we are supposed to be chasing them, we store their position
-        if (collision.tag == "Player" && enemyMovementType == MovementPattern.Chase)
+        if (collision.tag == "Player" && (enemyMovementType == MovementPattern.Chase || enemyMovementType == MovementPattern.PatrolAndChase))
         {
             playerTransform = collision.transform;
         }
@@ -56,7 +60,7 @@ public class BaseEnemy : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         // If the player has left our chase range, we delete their position
-        if (collision.tag == "Player" && enemyMovementType == MovementPattern.Chase)
+        if (collision.tag == "Player" && (enemyMovementType == MovementPattern.Chase || enemyMovementType == MovementPattern.PatrolAndChase))
         {
             playerTransform = null;
         }

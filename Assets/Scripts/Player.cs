@@ -1,12 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-
-    public Text scoreText;
 
     private Rigidbody2D rb2d;
     private const int MOVEMENT_SPEED = 500;
@@ -14,7 +11,6 @@ public class Player : MonoBehaviour
     private Animator playerAnimator;
     private SpriteRenderer playerRenderer;
     private bool IsOnTheGround;
-    private int score;
 
     // Use this for initialization
     void Start()
@@ -58,28 +54,7 @@ public class Player : MonoBehaviour
                 rb2d.AddForce(Vector2.up * JUMP_SPEED);
                 IsOnTheGround = false;
             }
-
-            // Save the player if they fall off
-            if (transform.position.y < -15)
-            {
-                transform.position = Vector3.zero;
-
-                // Take away a point for saving them
-                if (score > 0)
-                {
-                    score--;
-                    scoreText.text = "Score: " + score;
-                }
-            }
-
-            GameManager.instance.SetCameraPosition(transform.position);
         }
-    }
-
-    public void AddToScore(int amount)
-    {
-        score += amount;
-        scoreText.text = "Score: " + score;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

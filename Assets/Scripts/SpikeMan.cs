@@ -19,18 +19,20 @@ public class SpikeMan : BaseEnemy
     void Update()
     {
 
-        if (enemyMovementType == MovementPattern.Chase && playerTransform != null)
+        if ((enemyMovementType == MovementPattern.Chase || enemyMovementType == MovementPattern.PatrolAndChase) && playerTransform != null)
         {
+            // If we weren't already walking lets start now
             if (currentAction != Actions.Walking)
             {
-                enemyAnimator.SetTrigger("Walk");
+                enemyAnimator.SetTrigger("Walk"); 
                 currentAction = Actions.Walking;
             }
 
             MoveTowards(playerTransform.position, MovementType.Horizontal);            
         }
-        else if (enemyMovementType == MovementPattern.Patrol && patrolPoints.Count > 0)
+        else if ((enemyMovementType == MovementPattern.Patrol || enemyMovementType == MovementPattern.PatrolAndChase) && patrolPoints.Count > 0)
         {
+            // If we weren't already walking lets start now
             if (currentAction != Actions.Walking)
             {
                 enemyAnimator.SetTrigger("Walk");
