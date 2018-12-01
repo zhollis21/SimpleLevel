@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class Player : MonoBehaviour
 {
 
     public Text scoreText;
@@ -15,9 +15,9 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer playerRenderer;
     private bool IsOnTheGround;
     private int score;
-    
-	// Use this for initialization
-	void Start ()
+
+    // Use this for initialization
+    void Start()
     {
 
         rb2d = GetComponent<Rigidbody2D>();
@@ -25,14 +25,14 @@ public class PlayerController : MonoBehaviour
         playerRenderer = GetComponent<SpriteRenderer>();
 
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-		
         if (rb2d != null)
         {
-            float xMovement = Input.GetAxis("Horizontal");
+            // Handle Horizontal Movement
+            float xMovement = Input.GetAxisRaw("Horizontal");
 
             if (xMovement > .2f || xMovement < -.2f)
             {
@@ -40,13 +40,17 @@ public class PlayerController : MonoBehaviour
                 playerAnimator.SetBool("Walking", true);
 
                 playerRenderer.flipX = xMovement < 0; // If we are walking left, flip the animation
-            }                        
+            }
             else
             {
                 playerAnimator.SetBool("Walking", false);
+                
+                if (IsOnTheGround) // Stop the player from sliding on the ground
+                    rb2d.velocity = Vector2.up * rb2d.velocity.y;
             }
 
 
+            // Handle Vertical Movement
             float jumpMovement = Input.GetAxis("Jump");
 
             if (jumpMovement > .5 && IsOnTheGround)
@@ -56,7 +60,7 @@ public class PlayerController : MonoBehaviour
             }
 
             // Save the player if they fall off
-            if (transform.position.y < -10)
+            if (transform.position.y < -15)
             {
                 transform.position = Vector3.zero;
 
@@ -67,8 +71,10 @@ public class PlayerController : MonoBehaviour
                     scoreText.text = "Score: " + score;
                 }
             }
-        }           
-	}
+
+            GameManager.instance.SetCameraPosition(transform.position);
+        }
+    }
 
     public void AddToScore(int amount)
     {
@@ -79,7 +85,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
-            IsOnTheGround = true;        
+            IsOnTheGround = true;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
