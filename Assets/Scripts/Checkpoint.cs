@@ -6,18 +6,18 @@ public class Checkpoint : MonoBehaviour
 {
 
     private bool hasBeenActivated;
-    private Animator anim;
+    private Animator checkpointAnimator;
 
     private void Start()
     {
-        anim = GetComponent<Animator>();
+        checkpointAnimator = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player" && !hasBeenActivated)
         {
-            anim.SetBool("Activated", true);
+            checkpointAnimator.SetBool("Activated", true);
 
             // Notice I'm passing in the players position as they trigger this
             // This is because the flag is bottom-left oriented and the player is center oriented

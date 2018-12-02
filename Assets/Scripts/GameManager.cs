@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     // LateUpdate is called once per frame, after all Update functions
     void LateUpdate()
     {
-        CheckForOutOfBoundsOrDeath();
+        CheckForOutOfBounds();
         SetCameraPosition();
     }
 
@@ -52,19 +52,24 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Score: " + score;
     }
 
-    private void CheckForOutOfBoundsOrDeath()
+    public void RevivePlayer()
+    {
+        playerTransform.position = playerSpawnPoint;
+
+        // Take away a point for saving them
+        if (score > 0)
+        {
+            score--;
+            scoreText.text = "Score: " + score;
+        }
+    }
+
+    private void CheckForOutOfBounds()
     {
         // Save the player if they fall off
         if (playerTransform.position.y < minimumStageY - 5)
         {
-            playerTransform.position = playerSpawnPoint;
-
-            // Take away a point for saving them
-            if (score > 0)
-            {
-                score--;
-                scoreText.text = "Score: " + score;
-            }
+            RevivePlayer();
         }
     }
 

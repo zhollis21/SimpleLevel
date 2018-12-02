@@ -30,9 +30,11 @@ public class BaseEnemy : MonoBehaviour
             // If for some reason it wasn't able to add it, we can't chase the player
             if (chaseRangeCollider == null)
                 enemyMovementType = MovementPattern.Stay;
-
-            chaseRangeCollider.radius = chaseDistance;
-            chaseRangeCollider.isTrigger = true;
+            else
+            {
+                chaseRangeCollider.radius = chaseDistance;
+                chaseRangeCollider.isTrigger = true;
+            }
         }
 
         // If the enemy is set to patrol, but has no points, it can't patrol
