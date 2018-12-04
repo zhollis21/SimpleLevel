@@ -1,20 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-
-    public Text scoreText;
 
     private Rigidbody2D rb2d;
     private const int MOVEMENT_SPEED = 500;
     private const int JUMP_SPEED = 500;
     private Animator playerAnimator;
     private SpriteRenderer playerRenderer;
-    private bool IsOnTheGround;
-    private int score;
+    private bool isOnTheGround;
+    private bool isAlive = true;
 
     // Use this for initialization
     void Start()
@@ -29,6 +26,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isAlive)
+            return;
+
         if (rb2d != null)
         {
             // Handle Horizontal Movement
@@ -36,16 +36,16 @@ public class Player : MonoBehaviour
 
             if (xMovement > .2f || xMovement < -.2f)
             {
+                playerAnimator.SetBool("IsWalking", true);
                 rb2d.AddForce(Vector2.right * xMovement * Time.deltaTime * MOVEMENT_SPEED);
-                playerAnimator.SetBool("Walking", true);
 
                 playerRenderer.flipX = xMovement < 0; // If we are walking left, flip the animation
             }
             else
             {
-                playerAnimator.SetBool("Walking", false);
-                
-                if (IsOnTheGround) // Stop the player from sliding on the ground
+                playerAnimator.SetBool("IsWalking", false);
+
+                if (isOnTheGround) // Stop the player from sliding on the ground
                     rb2d.velocity = Vector2.up * rb2d.velocity.y;
             }
 
@@ -53,44 +53,36 @@ public class Player : MonoBehaviour
             // Handle Vertical Movement
             float jumpMovement = Input.GetAxis("Jump");
 
-            if (jumpMovement > .5 && IsOnTheGround)
+            if (jumpMovement > .5 && isOnTheGround)
             {
                 rb2d.AddForce(Vector2.up * JUMP_SPEED);
-                IsOnTheGround = false;
+                isOnTheGround = false;
             }
-
-            // Save the player if they fall off
-            if (transform.position.y < -15)
-            {
-                transform.position = Vector3.zero;
-
-                // Take away a point for saving them
-                if (score > 0)
-                {
-                    score--;
-                    scoreText.text = "Score: " + score;
-                }
-            }
-
-            GameManager.instance.SetCameraPosition(transform.position);
         }
     }
 
-    public void AddToScore(int amount)
+    public void Kill()
     {
-        score += amount;
-        scoreText.text = "Score: " + score;
+        isAlive = false;
+        playerAnimator.SetBool("IsDead", true);
+    }
+
+    public void Revive()
+    {
+        isAlive = true;
+        GameManager.instance.RevivePlayer();
+        playerAnimator.SetBool("IsDead", false);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
-            IsOnTheGround = true;
+            isOnTheGround = true;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
-            IsOnTheGround = false;
+            isOnTheGround = false;
     }
 }
