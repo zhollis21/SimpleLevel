@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114213844454704680}
   - component: {fileID: 70536550876498094}
   m_Layer: 0
-  m_Name: SpikeMan
+  m_Name: spikeMan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
