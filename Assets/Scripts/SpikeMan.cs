@@ -2,12 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpikeMan : BaseEnemy
+public class SpikeMan : SingleDirectionEnemy
 {
 
     private Actions currentAction;
 
     private enum Actions { Standing, Walking, Jumping }
+
+    // Use this for initialization
+    protected override void Start()
+    {
+        base.Start();
+
+        enemyMovementDirection = MovementDirection.Horizontal;
+    }
 
     // Update is called once per frame
     void Update()
@@ -22,7 +30,7 @@ public class SpikeMan : BaseEnemy
                 currentAction = Actions.Walking;
             }
 
-            MoveTowards(playerTransform.position, MovementType.Horizontal);            
+            MoveTowards(playerTransform.position.x);            
         }
         else if ((enemyMovementType == MovementPattern.Patrol || enemyMovementType == MovementPattern.PatrolAndChase) && patrolPoints.Count > 0)
         {
@@ -33,17 +41,7 @@ public class SpikeMan : BaseEnemy
                 currentAction = Actions.Walking;
             }
 
-            MoveTowards(patrolPoints[patrolPointIndex], MovementType.Horizontal);
-
-            // If we are at the destination, lets set the next destination
-            if (Mathf.Abs(patrolPoints[patrolPointIndex].x - transform.position.x) < .1)
-            {
-                patrolPointIndex++;
-
-                // If we just arrived at the last point, start over
-                if (patrolPointIndex == patrolPoints.Count)
-                    patrolPointIndex = 0;
-            }
+            Patrol();
         }
         else if (currentAction != Actions.Standing)
         {
