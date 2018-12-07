@@ -10,7 +10,7 @@ public class SingleDirectionEnemy : BaseEnemy
     public enum MovementDirection { Horizontal, Vertical }
 
     protected List<float> patrolPoints;
-    public MovementDirection enemyMovementDirection;
+    protected MovementDirection enemyMovementDirection;
 
     // Use this for initialization
     protected override void Start()

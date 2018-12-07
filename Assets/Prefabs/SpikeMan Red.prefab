@@ -25,11 +25,7 @@ GameObject:
   - component: {fileID: 114213844454704680}
   - component: {fileID: 70536550876498094}
   m_Layer: 0
-<<<<<<< HEAD:Assets/Prefabs/SpikeMan Red.prefab
   m_Name: SpikeMan Red
-=======
-  m_Name: spikeMan
->>>>>>> pr/9:Assets/Prefabs/spikeMan.prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,9 +168,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyMovementType: 1
   movementSpeed: 2
-  patrolPoints:
-  - 0
-  - 0
+  startingPatrolPoint: 0
+  endingPatrolPoint: 0
 --- !u!114 &114766572453439736
 MonoBehaviour:
   m_ObjectHideFlags: 1

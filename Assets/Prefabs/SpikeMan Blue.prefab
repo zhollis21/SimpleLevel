@@ -110,7 +110,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.25}
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 7
 --- !u!60 &60882423657788086
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -184,9 +184,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyMovementType: 2
   movementSpeed: 2
-  patrolPoints:
-  - 0
-  - 0
+  startingPatrolPoint: 0
+  endingPatrolPoint: 0
+  enemyMovementDirection: 0
 --- !u!114 &114766572453439736
 MonoBehaviour:
   m_ObjectHideFlags: 1

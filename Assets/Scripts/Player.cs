@@ -6,12 +6,16 @@ public class Player : MonoBehaviour
 {
 
     private Rigidbody2D rb2d;
-    private const int MOVEMENT_SPEED = 500;
+    private const int MOVEMENT_SPEED = 750;
+    private const int MAX_VELOCITY = 5;
     private const int JUMP_SPEED = 500;
     private Animator playerAnimator;
     private SpriteRenderer playerRenderer;
     private bool isOnTheGround;
     private bool isAlive = true;
+    private Actions currentAction;
+
+    private enum Actions { Standing, Walking, Jumping }
 
     // Use this for initialization
     void Start()
@@ -20,6 +24,7 @@ public class Player : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
         playerRenderer = GetComponent<SpriteRenderer>();
+        currentAction = Actions.Standing;
 
     }
 
@@ -34,16 +39,41 @@ public class Player : MonoBehaviour
             // Handle Horizontal Movement
             float xMovement = Input.GetAxisRaw("Horizontal");
 
-            if (xMovement > .2f || xMovement < -.2f)
+            if (xMovement > .2f)
             {
-                playerAnimator.SetBool("IsWalking", true);
-                rb2d.AddForce(Vector2.right * xMovement * Time.deltaTime * MOVEMENT_SPEED);
+                if (currentAction != Actions.Walking)
+                {
+                    playerAnimator.SetBool("IsWalking", true);
+                    currentAction = Actions.Walking;
+                }
 
-                playerRenderer.flipX = xMovement < 0; // If we are walking left, flip the animation
+                if (rb2d.velocity.x < MAX_VELOCITY)
+                    rb2d.AddForce(Vector2.right * xMovement * Time.deltaTime * MOVEMENT_SPEED);
+
+                if (playerRenderer.flipX)
+                    playerRenderer.flipX = false;
+            }
+            else if (xMovement < -.2f)
+            {
+                if (currentAction != Actions.Walking)
+                {
+                    playerAnimator.SetBool("IsWalking", true);
+                    currentAction = Actions.Walking;
+                }
+
+                if (rb2d.velocity.x > -MAX_VELOCITY)
+                    rb2d.AddForce(Vector2.right * xMovement * Time.deltaTime * MOVEMENT_SPEED);
+
+                if (!playerRenderer.flipX)
+                    playerRenderer.flipX = true;
             }
             else
             {
-                playerAnimator.SetBool("IsWalking", false);
+                if (currentAction != Actions.Standing)
+                {
+                    playerAnimator.SetBool("IsWalking", false);
+                    currentAction = Actions.Standing;
+                }
 
                 if (isOnTheGround) // Stop the player from sliding on the ground
                     rb2d.velocity = Vector2.up * rb2d.velocity.y;
