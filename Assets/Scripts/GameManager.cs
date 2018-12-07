@@ -13,9 +13,9 @@ public class GameManager : MonoBehaviour
     public int minimumStageY;
     public Text scoreText;
     public Transform playerTransform;
+    public Vector2 playerSpawnPoint;
 
     private const int CAMERA_RADIUS_VERTICAL = 10;
-    private Vector2 playerSpawnPoint;
     private int score;
 
     // This is called before all other start methods
