@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 95600079121860858}
   - component: {fileID: 114533614064849914}
   - component: {fileID: 60511437790334020}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FlyMan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 4635316380746056}
   - component: {fileID: 60013292685848376}
   - component: {fileID: 114368583721731230}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blades
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,9 +185,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyMovementType: 1
   movementSpeed: 2
-  patrolPoints:
-  - 0
-  - 0
+  startingPatrolPoint: 0
+  endingPatrolPoint: 0
 --- !u!212 &212260447058014412
 SpriteRenderer:
   m_ObjectHideFlags: 1
