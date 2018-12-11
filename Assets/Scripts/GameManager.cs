@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,9 +14,9 @@ public class GameManager : MonoBehaviour
     public int minimumStageY;
     public Text scoreText;
     public Transform playerTransform;
+    public Vector2 playerSpawnPoint;
 
     private const int CAMERA_RADIUS_VERTICAL = 10;
-    private Vector2 playerSpawnPoint;
     private int score;
 
     // This is called before all other start methods
@@ -62,6 +63,11 @@ public class GameManager : MonoBehaviour
             score--;
             scoreText.text = "Score: " + score;
         }
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void CheckForOutOfBounds()

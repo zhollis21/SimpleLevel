@@ -5,12 +5,14 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
 
+    public int value;
+
     // When the player enters the collider of the coin, we send a score update and destroy the coin.
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            GameManager.instance.AddToScore(1);
+            GameManager.instance.AddToScore(value);
             Destroy(gameObject);
         }
     }

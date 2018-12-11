@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 95600079121860858}
   - component: {fileID: 114533614064849914}
   - component: {fileID: 60511437790334020}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FlyMan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 4635316380746056}
   - component: {fileID: 60013292685848376}
   - component: {fileID: 114368583721731230}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blades
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1025299963516998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4635316380746056}
@@ -184,11 +184,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyMovementType: 1
-  patrolPoints:
-  - {x: -23, y: 0}
-  - {x: -23, y: 6}
-  chaseDistance: 0
   movementSpeed: 2
+  startingPatrolPoint: 0
+  endingPatrolPoint: 0
 --- !u!212 &212260447058014412
 SpriteRenderer:
   m_ObjectHideFlags: 1
