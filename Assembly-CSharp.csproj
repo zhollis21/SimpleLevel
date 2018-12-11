@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\DualDirectionEnemy.cs" />
     <Compile Include="Assets\Scripts\FlyMan.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\SingleDirectionEnemy.cs" />
     <Compile Include="Assets\Scripts\SpikeMan.cs" />
