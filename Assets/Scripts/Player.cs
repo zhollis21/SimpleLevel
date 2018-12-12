@@ -8,9 +8,9 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb2d;
     private CapsuleCollider2D playerCollider;
     private RaycastHit2D[] castCollisions;
-    private const int MOVEMENT_SPEED = 750;
-    private const int MAX_VELOCITY = 5;
-    private const int JUMP_FORCE = 500;
+    private const int MOVEMENT_SPEED = 800;
+    private const int MAX_VELOCITY = 7;
+    private const int JUMP_FORCE = 650;
     private const float JUMP_COOLDOWN = .75f;
     private Animator playerAnimator;
     private SpriteRenderer playerRenderer;

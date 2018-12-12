@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/Underground Level.unity
-=======
 - path: Assets/Scenes/Zach's Scene.unity
->>>>>>> 25914ff33afb2ba1c88a96cc4e748c7d91baa92d
   isLoaded: 1
   isActive: 1
