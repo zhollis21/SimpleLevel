@@ -72,9 +72,17 @@
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\SingleDirectionEnemy.cs" />
     <Compile Include="Assets\Scripts\SpikeMan.cs" />
+    <None Include="Assets\Artwork\Extended Enemies\Spritesheets\alienPink.xml" />
+    <None Include="Assets\Artwork\Extended Enemies\Spritesheets\alienBeige.xml" />
+    <None Include="Assets\Artwork\Extended Enemies\license.txt" />
+    <None Include="Assets\Artwork\Extended Enemies\Spritesheets\alienGreen.xml" />
     <None Include="Assets\Sounds\Essential Retro Collection [EXCERPTS]\INFO.txt" />
     <None Include="Assets\Artwork\Medieval\License.txt" />
     <None Include="Assets\Artwork\spritesheet_jumper.xml" />
+    <None Include="Assets\Artwork\Extended Enemies\Spritesheets\enemies.xml" />
+    <None Include="Assets\Artwork\Extended Enemies\Spritesheets\alienBlue.xml" />
+    <None Include="Assets\Artwork\Extended Enemies\Spritesheets\aliens.xml" />
+    <None Include="Assets\Artwork\Extended Enemies\Spritesheets\alienYellow.xml" />
     <None Include="Assets\Artwork\Medieval\Spritesheet\medieval_spritesheet.xml" />
     <None Include="Assets\Artwork\license.txt" />
     <Reference Include="UnityEditor.StandardEvents">
