@@ -21,16 +21,41 @@ public class SpikeMan : SingleDirectionEnemy
     void Update()
     {
 
-        if ((enemyMovementType == MovementPattern.Chase || enemyMovementType == MovementPattern.PatrolAndChase) && playerTransform != null)
+        if (enemyMovementType == MovementPattern.Chase && playerTransform != null)
         {
             // If we weren't already walking lets start now
             if (currentAction != Actions.Walking)
             {
-                enemyAnimator.SetTrigger("Walk"); 
+                enemyAnimator.SetTrigger("Walk");
                 currentAction = Actions.Walking;
             }
 
-            MoveTowards(playerTransform.position.x);            
+            MoveTowards(playerTransform.position.x);
+        }
+        else if (enemyMovementType == MovementPattern.PatrolAndChase && playerTransform != null)
+        {
+            // If we are chasing the player, but waiting at the end of our range
+            if ((playerTransform.position.x <= patrolPoints[0] && transform.position.x == patrolPoints[0]) 
+                || (playerTransform.position.x >= patrolPoints[1] && transform.position.x == patrolPoints[1])
+                || playerTransform.position.x == transform.position.x)
+            {
+                if (currentAction != Actions.Standing)
+                {
+                    enemyAnimator.SetTrigger("Stand");
+                    currentAction = Actions.Standing;
+                }
+            }
+            else
+            {
+                // If we weren't already walking lets start now
+                if (currentAction != Actions.Walking)
+                {
+                    enemyAnimator.SetTrigger("Walk");
+                    currentAction = Actions.Walking;
+                }
+
+                MoveTowardsInRange(playerTransform.position.x, patrolPoints[0], patrolPoints[1]);
+            }
         }
         else if ((enemyMovementType == MovementPattern.Patrol || enemyMovementType == MovementPattern.PatrolAndChase) && patrolPoints.Count > 0)
         {
@@ -48,5 +73,5 @@ public class SpikeMan : SingleDirectionEnemy
             enemyAnimator.SetTrigger("Stand");
             currentAction = Actions.Standing;
         }
-    }    
+    }
 }
