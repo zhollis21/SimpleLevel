@@ -131,8 +131,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 20945056515138146}
   stageBottom: -15
-  stageRight: 0
-  stageLeft: 0
+  stageLeft: -100
+  stageRight: 100
   scoreText: {fileID: 0}
   playerTransform: {fileID: 0}
   playerSpawnPoint: {x: 0, y: 0}

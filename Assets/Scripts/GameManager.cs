@@ -12,13 +12,14 @@ public class GameManager : MonoBehaviour
 
     public Camera mainCamera;
     public int stageBottom;
-    public int stageRight;
     public int stageLeft;
+    public int stageRight;
     public Text scoreText;
     public Transform playerTransform;
     public Vector2 playerSpawnPoint;
 
     private const int CAMERA_RADIUS_VERTICAL = 10;
+    private const int CAMERA_RADIUS_HORIZONTAL = 18;
     private const int CAMERA_GRACE_HORIZONTAL = 7;
     private const int CAMERA_GRACE_VERTICAL = 4;
     private int score;
@@ -76,8 +77,10 @@ public class GameManager : MonoBehaviour
 
     private void CheckForOutOfBounds()
     {
-        // Save the player if they fall off
-        if (playerTransform.position.y < stageBottom - 5)
+        // Reset the player if they go out of bounds
+        if (playerTransform.position.y < stageBottom - CAMERA_RADIUS_VERTICAL / 2 ||
+            playerTransform.position.x < stageLeft - CAMERA_RADIUS_HORIZONTAL / 4 ||
+            playerTransform.position.x > stageRight + CAMERA_RADIUS_HORIZONTAL / 4)
         {
             RevivePlayer();
         }
@@ -88,7 +91,8 @@ public class GameManager : MonoBehaviour
         float xPosition = mainCamera.transform.position.x;
         float yPosition = mainCamera.transform.position.y;
 
-        // We don't want the camera following the player all the way to their death if they fall.
+        // Set the xPosition of the Camera
+        // We don't want the camera following the player off the map if they fall.
         if (playerTransform.position.y < stageBottom + CAMERA_RADIUS_VERTICAL - CAMERA_GRACE_VERTICAL)
             yPosition = stageBottom + CAMERA_RADIUS_VERTICAL;
 
@@ -100,8 +104,17 @@ public class GameManager : MonoBehaviour
         else if (playerTransform.position.y > mainCamera.transform.position.y + CAMERA_GRACE_VERTICAL)
             yPosition = playerTransform.position.y - CAMERA_GRACE_VERTICAL;
 
+        // Set the yPosition of the Camera
+        // We don't want the camera following the player off the map if they jump far to the left
+        if (playerTransform.position.x < stageLeft + CAMERA_RADIUS_HORIZONTAL - CAMERA_GRACE_HORIZONTAL)
+            xPosition = stageLeft + CAMERA_RADIUS_HORIZONTAL;
+
+        // We don't want the camera following the player off the map if they jump far to the right
+        else if (playerTransform.position.x > stageRight - CAMERA_RADIUS_HORIZONTAL + CAMERA_GRACE_HORIZONTAL)
+            xPosition = stageRight - CAMERA_RADIUS_HORIZONTAL;
+
         // Move the camera left
-        if (playerTransform.position.x < mainCamera.transform.position.x - CAMERA_GRACE_HORIZONTAL)
+        else if (playerTransform.position.x < mainCamera.transform.position.x - CAMERA_GRACE_HORIZONTAL)
             xPosition = playerTransform.position.x + CAMERA_GRACE_HORIZONTAL;
 
         // Move the camera right
