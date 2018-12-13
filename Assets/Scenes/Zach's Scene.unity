@@ -54030,7 +54030,7 @@ Prefab:
     - target: {fileID: 50612600454172030, guid: 3d9fd4d3015497f4097486e55c0ab733,
         type: 2}
       propertyPath: m_GravityScale
-      value: 1.25
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 70911631169082568, guid: 3d9fd4d3015497f4097486e55c0ab733,
         type: 2}
