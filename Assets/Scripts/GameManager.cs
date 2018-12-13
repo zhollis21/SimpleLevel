@@ -11,12 +11,16 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public Camera mainCamera;
-    public int minimumStageY;
+    public int stageBottom;
+    public int stageRight;
+    public int stageLeft;
     public Text scoreText;
     public Transform playerTransform;
     public Vector2 playerSpawnPoint;
 
     private const int CAMERA_RADIUS_VERTICAL = 10;
+    private const int CAMERA_GRACE_HORIZONTAL = 7;
+    private const int CAMERA_GRACE_VERTICAL = 4;
     private int score;
 
     // This is called before all other start methods
@@ -73,7 +77,7 @@ public class GameManager : MonoBehaviour
     private void CheckForOutOfBounds()
     {
         // Save the player if they fall off
-        if (playerTransform.position.y < minimumStageY - 5)
+        if (playerTransform.position.y < stageBottom - 5)
         {
             RevivePlayer();
         }
@@ -81,9 +85,29 @@ public class GameManager : MonoBehaviour
 
     private void SetCameraPosition()
     {
-        // We don't want the camera following the player all the way to their death if they fall.
-        float yValue = Mathf.Max(playerTransform.position.y, minimumStageY + CAMERA_RADIUS_VERTICAL);
+        float xPosition = mainCamera.transform.position.x;
+        float yPosition = mainCamera.transform.position.y;
 
-        mainCamera.transform.position = new Vector3(playerTransform.position.x, yValue, mainCamera.transform.position.z);
+        // We don't want the camera following the player all the way to their death if they fall.
+        if (playerTransform.position.y < stageBottom + CAMERA_RADIUS_VERTICAL - CAMERA_GRACE_VERTICAL)
+            yPosition = stageBottom + CAMERA_RADIUS_VERTICAL;
+
+        // Move the camera down
+        else if (playerTransform.position.y < mainCamera.transform.position.y - CAMERA_GRACE_VERTICAL)
+            yPosition = playerTransform.position.y + CAMERA_GRACE_VERTICAL;
+
+        // Move the camera up
+        else if (playerTransform.position.y > mainCamera.transform.position.y + CAMERA_GRACE_VERTICAL)
+            yPosition = playerTransform.position.y - CAMERA_GRACE_VERTICAL;
+
+        // Move the camera left
+        if (playerTransform.position.x < mainCamera.transform.position.x - CAMERA_GRACE_HORIZONTAL)
+            xPosition = playerTransform.position.x + CAMERA_GRACE_HORIZONTAL;
+
+        // Move the camera right
+        else if (playerTransform.position.x > mainCamera.transform.position.x + CAMERA_GRACE_HORIZONTAL)
+            xPosition = playerTransform.position.x - CAMERA_GRACE_HORIZONTAL;
+
+        mainCamera.transform.position = new Vector3(xPosition, yPosition, mainCamera.transform.position.z);
     }
 }
