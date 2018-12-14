@@ -34,7 +34,7 @@ public class SingleDirectionEnemy : BaseEnemy
     {
         if (enemyMovementDirection == MovementDirection.Horizontal) // Only changes x value
         {
-            enemyRenderer.flipX = destination < transform.position.x;
+            enemyRenderer.flipX = destination > transform.position.x;
             transform.position = new Vector2(Mathf.MoveTowards(transform.position.x, destination, movementSpeed * Time.deltaTime), transform.position.y);
         }
         else // Only changes y value
@@ -45,7 +45,7 @@ public class SingleDirectionEnemy : BaseEnemy
     // NOTE: startRange needs to always be less than or equal to endRange, so make sure they are in the correct order
     protected void MoveTowardsInRange(float destination, float startRange, float endRange)
     {
-        enemyRenderer.flipX = destination < transform.position.x;
+        enemyRenderer.flipX = destination > transform.position.x;
 
         // The destination is out of our range to the left/down
         if (destination < startRange)
