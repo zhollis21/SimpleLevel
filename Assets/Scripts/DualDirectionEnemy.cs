@@ -24,7 +24,7 @@ public class DualDirectionEnemy : BaseEnemy
     // Moves the player toward the destination based on their movement speed
     protected void MoveTowards(Vector2 destination)
     {
-        enemyRenderer.flipX = destination.x < transform.position.x;
+        enemyRenderer.flipX = destination.x > transform.position.x;
 
         transform.position = Vector2.MoveTowards(transform.position, destination, movementSpeed * Time.deltaTime);
     }
