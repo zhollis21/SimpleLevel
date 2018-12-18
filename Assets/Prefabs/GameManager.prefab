@@ -130,6 +130,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 20945056515138146}
-  minimumStageY: -15
+  stageBottom: -15
+  stageLeft: -100
+  stageRight: 100
   scoreText: {fileID: 0}
   playerTransform: {fileID: 0}
+  playerSpawnPoint: {x: 0, y: 0}

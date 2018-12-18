@@ -18,6 +18,7 @@ public class SingleDirectionEnemy : BaseEnemy
         base.Start();
 
         patrolPoints = new List<float> { startingPatrolPoint, endingPatrolPoint};
+        patrolPoints.Sort(); // Important for Patrol and Chase
 
         // If the enemy is set to patrol, but has no points, it can't patrol
         if (enemyMovementType == MovementPattern.Patrol && patrolPoints.Count < 1)
@@ -33,9 +34,30 @@ public class SingleDirectionEnemy : BaseEnemy
     {
         if (enemyMovementDirection == MovementDirection.Horizontal) // Only changes x value
         {
-            enemyRenderer.flipX = destination < transform.position.x;
+            enemyRenderer.flipX = destination > transform.position.x;
             transform.position = new Vector2(Mathf.MoveTowards(transform.position.x, destination, movementSpeed * Time.deltaTime), transform.position.y);
         }
+        else // Only changes y value
+            transform.position = new Vector2(transform.position.x, Mathf.MoveTowards(transform.position.y, destination, movementSpeed * Time.deltaTime));
+    }
+
+    // Moves the player toward the destination based on their range, movement speed and movement type
+    // NOTE: startRange needs to always be less than or equal to endRange, so make sure they are in the correct order
+    protected void MoveTowardsInRange(float destination, float startRange, float endRange)
+    {
+        enemyRenderer.flipX = destination > transform.position.x;
+
+        // The destination is out of our range to the left/down
+        if (destination < startRange)
+            destination = startRange;
+
+        // The destination is out of our range to the right/up
+        else if (destination > endRange)
+            destination = endRange;
+
+        if (enemyMovementDirection == MovementDirection.Horizontal) // Only changes x value        
+            transform.position = new Vector2(Mathf.MoveTowards(transform.position.x, destination, movementSpeed * Time.deltaTime), transform.position.y);
+
         else // Only changes y value
             transform.position = new Vector2(transform.position.x, Mathf.MoveTowards(transform.position.y, destination, movementSpeed * Time.deltaTime));
     }
