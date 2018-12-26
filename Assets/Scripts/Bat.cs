@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bat : DualDirectionEnemy
+public class Bat : DualAxisMovementEnemy
 {
 
     private Actions currentAction;

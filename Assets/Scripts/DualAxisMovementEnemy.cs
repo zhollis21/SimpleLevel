@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DualDirectionEnemy : BaseEnemy
+public class DualAxisMovementEnemy : BaseEnemy
 {
 
     public List<Vector2> patrolPoints;
