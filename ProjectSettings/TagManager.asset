@@ -43,6 +43,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Backdrop
+    uniqueID: 504111515
+    locked: 0
+  - name: Stage
+    uniqueID: 1471765895
+    locked: 0
   - name: Non-Interactable Objects
     uniqueID: 2759019647
     locked: 0
@@ -54,4 +60,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 4103463645
+    locked: 0
+  - name: Hidden Area
+    uniqueID: 3178355287
     locked: 0

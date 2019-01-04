@@ -6,6 +6,10 @@ public class DualAxisMovementEnemy : BaseEnemy
 {
 
     public List<Vector2> patrolPoints;
+    [Tooltip("When this is turned on the enemy will reverse back through the patrol points after reaching the last point.")]
+    public bool Trace;
+
+    private int direction = 1;
 
     // Use this for initialization
     protected override void Start()
@@ -36,11 +40,24 @@ public class DualAxisMovementEnemy : BaseEnemy
         // If we are at the destination, lets set the next destination
         if (Mathf.Abs(patrolPoints[patrolPointIndex].x - transform.position.x) < .1 && Mathf.Abs(patrolPoints[patrolPointIndex].y - transform.position.y) < .1)
         {
-            patrolPointIndex++;
+            patrolPointIndex += direction;
 
             // If we just arrived at the last point, start over
             if (patrolPointIndex == patrolPoints.Count)
-                patrolPointIndex = 0;
+            {
+                if (Trace)
+                {
+                    direction = -1;
+                    patrolPointIndex += direction;
+                }
+                else
+                    patrolPointIndex = 0;
+            }
+            else if (patrolPointIndex == -1)
+            {
+                direction = 1;
+                patrolPointIndex += direction;
+            }
         }
     }
 }

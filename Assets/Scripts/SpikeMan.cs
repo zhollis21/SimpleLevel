@@ -7,7 +7,7 @@ public class SpikeMan : SingleDirectionEnemy
 
     private Actions currentAction;
 
-    private enum Actions { Standing, Walking, Jumping }
+    private enum Actions { Standing, Walking }
 
     // Use this for initialization
     protected override void Start()
@@ -26,7 +26,7 @@ public class SpikeMan : SingleDirectionEnemy
             // If we weren't already walking lets start now
             if (currentAction != Actions.Walking)
             {
-                enemyAnimator.SetTrigger("Walk");
+                enemyAnimator.SetBool("IsWalking", true);
                 currentAction = Actions.Walking;
             }
 
@@ -41,7 +41,7 @@ public class SpikeMan : SingleDirectionEnemy
             {
                 if (currentAction != Actions.Standing)
                 {
-                    enemyAnimator.SetTrigger("Stand");
+                    enemyAnimator.SetBool("IsWalking", false);
                     currentAction = Actions.Standing;
                 }
             }
@@ -50,7 +50,7 @@ public class SpikeMan : SingleDirectionEnemy
                 // If we weren't already walking lets start now
                 if (currentAction != Actions.Walking)
                 {
-                    enemyAnimator.SetTrigger("Walk");
+                    enemyAnimator.SetBool("IsWalking", true);
                     currentAction = Actions.Walking;
                 }
 
@@ -62,7 +62,7 @@ public class SpikeMan : SingleDirectionEnemy
             // If we weren't already walking lets start now
             if (currentAction != Actions.Walking)
             {
-                enemyAnimator.SetTrigger("Walk");
+                enemyAnimator.SetBool("IsWalking", true);
                 currentAction = Actions.Walking;
             }
 
@@ -70,7 +70,7 @@ public class SpikeMan : SingleDirectionEnemy
         }
         else if (currentAction != Actions.Standing)
         {
-            enemyAnimator.SetTrigger("Stand");
+            enemyAnimator.SetBool("IsWalking", false);
             currentAction = Actions.Standing;
         }
     }
