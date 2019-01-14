@@ -77,6 +77,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void QuitToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     private void CheckForOutOfBounds()
     {
         // Reset the player if they go out of bounds
