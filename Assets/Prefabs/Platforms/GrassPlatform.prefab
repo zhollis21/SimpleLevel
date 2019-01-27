@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 251456045013417684}
   - component: {fileID: 50372378550857774}
   m_Layer: 0
-  m_Name: Grass Platform
+  m_Name: GrassPlatform
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
