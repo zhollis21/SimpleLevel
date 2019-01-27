@@ -34,18 +34,18 @@ public class SingleDirectionEnemy : BaseEnemy
     {
         if (enemyMovementDirection == MovementDirection.Horizontal) // Only changes x value
         {
-            enemyRenderer.flipX = destination > transform.position.x;
-            transform.position = new Vector2(Mathf.MoveTowards(transform.position.x, destination, movementSpeed * Time.deltaTime), transform.position.y);
+            enemyRenderer.flipX = destination > transform.localPosition.x;
+            transform.localPosition = new Vector2(Mathf.MoveTowards(transform.localPosition.x, destination, movementSpeed * Time.deltaTime), transform.localPosition.y);
         }
         else // Only changes y value
-            transform.position = new Vector2(transform.position.x, Mathf.MoveTowards(transform.position.y, destination, movementSpeed * Time.deltaTime));
+            transform.localPosition = new Vector2(transform.localPosition.x, Mathf.MoveTowards(transform.localPosition.y, destination, movementSpeed * Time.deltaTime));
     }
 
     // Moves the player toward the destination based on their range, movement speed and movement type
     // NOTE: startRange needs to always be less than or equal to endRange, so make sure they are in the correct order
     protected void MoveTowardsInRange(float destination, float startRange, float endRange)
     {
-        enemyRenderer.flipX = destination > transform.position.x;
+        enemyRenderer.flipX = destination > transform.localPosition.x;
 
         // The destination is out of our range to the left/down
         if (destination < startRange)
@@ -56,10 +56,10 @@ public class SingleDirectionEnemy : BaseEnemy
             destination = endRange;
 
         if (enemyMovementDirection == MovementDirection.Horizontal) // Only changes x value        
-            transform.position = new Vector2(Mathf.MoveTowards(transform.position.x, destination, movementSpeed * Time.deltaTime), transform.position.y);
+            transform.localPosition = new Vector2(Mathf.MoveTowards(transform.localPosition.x, destination, movementSpeed * Time.deltaTime), transform.localPosition.y);
 
         else // Only changes y value
-            transform.position = new Vector2(transform.position.x, Mathf.MoveTowards(transform.position.y, destination, movementSpeed * Time.deltaTime));
+            transform.localPosition = new Vector2(transform.localPosition.x, Mathf.MoveTowards(transform.localPosition.y, destination, movementSpeed * Time.deltaTime));
     }
 
     protected void Patrol()
@@ -67,9 +67,9 @@ public class SingleDirectionEnemy : BaseEnemy
         float movementAxis;
 
         if (enemyMovementDirection == MovementDirection.Horizontal)
-            movementAxis = transform.position.x;
+            movementAxis = transform.localPosition.x;
         else
-            movementAxis = transform.position.y;
+            movementAxis = transform.localPosition.y;
 
         MoveTowards(patrolPoints[patrolPointIndex]);
 

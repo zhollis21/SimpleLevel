@@ -102,6 +102,7 @@ MonoBehaviour:
   enemyMovementType: 1
   movementSpeed: 2
   patrolPoints: []
+  Trace: 0
 --- !u!212 &212497243861730028
 SpriteRenderer:
   m_ObjectHideFlags: 1

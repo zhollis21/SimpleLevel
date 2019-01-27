@@ -797,9 +797,9 @@ GameObject:
   m_Component:
   - component: {fileID: 439043382}
   - component: {fileID: 439043381}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GrassPlatformRightSide
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54931,26 +54931,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 26
       objectReference: {fileID: 0}
-    - target: {fileID: 50612600454172030, guid: 3d9fd4d3015497f4097486e55c0ab733,
-        type: 2}
-      propertyPath: m_GravityScale
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 70911631169082568, guid: 3d9fd4d3015497f4097486e55c0ab733,
-        type: 2}
-      propertyPath: m_Offset.y
-      value: -0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 70911631169082568, guid: 3d9fd4d3015497f4097486e55c0ab733,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 1.53
-      objectReference: {fileID: 0}
-    - target: {fileID: 70911631169082568, guid: 3d9fd4d3015497f4097486e55c0ab733,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d9fd4d3015497f4097486e55c0ab733, type: 2}
   m_IsPrefabAsset: 0
@@ -55181,7 +55161,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.4}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -55192,7 +55172,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3, y: 1}
+  m_Size: {x: 3, y: 0.2}
   m_EdgeRadius: 0
 --- !u!114 &738825910
 MonoBehaviour:
@@ -55211,8 +55191,8 @@ MonoBehaviour:
   platformWidth: 5
   movementSpeed: 2
   patrolPoints:
-  - {x: -27, y: 0}
-  - {x: -17, y: 10}
+  - {x: -27, y: 2}
+  - {x: -23, y: 10}
   Trace: 0
 --- !u!4 &738825911
 Transform:
@@ -66600,6 +66580,10 @@ Prefab:
         type: 2}
       propertyPath: endingPatrolPoint
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025299963516998, guid: c920c113da946e844855e6d7a5ae04b1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c920c113da946e844855e6d7a5ae04b1, type: 2}
