@@ -21,6 +21,7 @@ public class Platform : MonoBehaviour
     public bool Trace;
 
     private int patrolPointIndex = 0;
+    private int playerCollidersInContact = 0;
     private int direction = 1;
     private BoxCollider2D platformCollider;
 
@@ -42,7 +43,7 @@ public class Platform : MonoBehaviour
 
     private void SetPlatformSpritesPositions()
     {
-        float leftPoint = -(platformWidth-1) / 2.0f;
+        float leftPoint = -(platformWidth - 1) / 2.0f;
 
         // Setting the left sprite's position
         leftSprite.transform.localPosition = new Vector2(leftPoint, 0);
@@ -104,11 +105,25 @@ public class Platform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        collision.collider.transform.SetParent(transform);
+        if (collision.collider.tag == "Enemy")
+            collision.collider.transform.SetParent(transform);
+        else if (collision.collider.tag == "Player")
+        {
+            collision.collider.transform.SetParent(transform);
+            playerCollidersInContact++;
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        collision.collider.transform.SetParent(null);
+        if (collision.collider.tag == "Enemy")
+            collision.collider.transform.SetParent(null);
+        else if (collision.collider.tag == "Player")
+        {
+            playerCollidersInContact--;
+            // Because we have multiple colliders on the player, we need to make sure all are not touching
+            if (playerCollidersInContact == 0)
+                collision.collider.transform.SetParent(null);
+        }
     }
 }

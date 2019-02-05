@@ -193,7 +193,7 @@ MonoBehaviour:
   middleSprite: {fileID: 1932883307493862}
   rightSprite: {fileID: 1206763040442696}
   platformWidth: 3
-  movementSpeed: 1.5
+  movementSpeed: 3
   patrolPoints: []
   Trace: 0
 --- !u!212 &212135641124552906
@@ -348,7 +348,7 @@ PlatformEffector2D:
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
+  m_SurfaceArc: 150
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
