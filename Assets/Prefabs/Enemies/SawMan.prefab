@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114285683906367122}
   m_Layer: 0
   m_Name: SawMan
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,6 +102,7 @@ MonoBehaviour:
   enemyMovementType: 1
   movementSpeed: 2
   patrolPoints: []
+  Trace: 0
 --- !u!212 &212497243861730028
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -28,9 +28,9 @@ public class DualAxisMovementEnemy : BaseEnemy
     // Moves the player toward the destination based on their movement speed
     protected void MoveTowards(Vector2 destination)
     {
-        enemyRenderer.flipX = destination.x > transform.position.x;
+        enemyRenderer.flipX = destination.x > transform.localPosition.x;
 
-        transform.position = Vector2.MoveTowards(transform.position, destination, movementSpeed * Time.deltaTime);
+        transform.localPosition = Vector2.MoveTowards(transform.localPosition, destination, movementSpeed * Time.deltaTime);
     }
 
     protected void Patrol()
@@ -38,7 +38,7 @@ public class DualAxisMovementEnemy : BaseEnemy
         MoveTowards(patrolPoints[patrolPointIndex]);
 
         // If we are at the destination, lets set the next destination
-        if (Mathf.Abs(patrolPoints[patrolPointIndex].x - transform.position.x) < .1 && Mathf.Abs(patrolPoints[patrolPointIndex].y - transform.position.y) < .1)
+        if (Mathf.Abs(patrolPoints[patrolPointIndex].x - transform.localPosition.x) < .1 && Mathf.Abs(patrolPoints[patrolPointIndex].y - transform.localPosition.y) < .1)
         {
             patrolPointIndex += direction;
 

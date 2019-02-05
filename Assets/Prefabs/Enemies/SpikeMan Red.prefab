@@ -24,10 +24,9 @@ GameObject:
   - component: {fileID: 95543241043158502}
   - component: {fileID: 114213844454704680}
   - component: {fileID: 70536550876498094}
-  - component: {fileID: 58208810229763390}
   m_Layer: 9
-  m_Name: SpikeMan Blue
-  m_TagString: Untagged
+  m_Name: SpikeMan Red
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,21 +95,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &58208810229763390
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1329729116357358}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.25}
-  serializedVersion: 2
-  m_Radius: 7
 --- !u!60 &60882423657788086
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -162,7 +146,7 @@ Animator:
   m_GameObject: {fileID: 1329729116357358}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 910348ec80fc625448332835feba5de8, type: 2}
+  m_Controller: {fileID: 9100000, guid: bc831f8a8a5c056488523c3c9da52394, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -182,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5ddf89d5090904887d806b7afc9557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMovementType: 2
+  enemyMovementType: 1
   movementSpeed: 2
   startingPatrolPoint: 0
   endingPatrolPoint: 0
@@ -230,9 +214,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1341161183
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: edde952ef76113b41b617b8a0a7e67d5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2fee57009f866e04685e9dca6117f2c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
