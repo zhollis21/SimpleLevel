@@ -3968,58 +3968,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92e8132ceccf58949831e20cb7bc9a7a, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &267349294 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1610149426912254, guid: 3d9fd4d3015497f4097486e55c0ab733,
-    type: 2}
-  m_PrefabInternal: {fileID: 1959512000}
---- !u!60 &267349296
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 267349294}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.2, y: 2.01}
-    newSize: {x: 1.2, y: 2.01}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.25879478, y: -0.8783145}
-      - {x: 0.28603554, y: -0.76060367}
-      - {x: 0.44363976, y: -0.65458846}
-      - {x: 0.5335207, y: -0.5545082}
-      - {x: -0.5380573, y: -0.545192}
-      - {x: -0.42074394, y: -0.6699884}
-      - {x: -0.28603745, y: -0.7622442}
-      - {x: -0.2593994, y: -0.8790786}
---- !u!70 &267349301
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 267349294}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0006012987, y: -0.9415221}
-  m_Size: {x: 0.7288135, y: 0.12695958}
-  m_Direction: 1
 --- !u!1001 &607793485
 Prefab:
   m_ObjectHideFlags: 0
@@ -73056,52 +73004,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 70911631169082568, guid: 3d9fd4d3015497f4097486e55c0ab733,
-        type: 2}
-      propertyPath: m_Offset.y
-      value: -0.16470414
-      objectReference: {fileID: 0}
-    - target: {fileID: 70911631169082568, guid: 3d9fd4d3015497f4097486e55c0ab733,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 1.3594083
-      objectReference: {fileID: 0}
-    - target: {fileID: 70665932702804842, guid: 3d9fd4d3015497f4097486e55c0ab733,
-        type: 2}
-      propertyPath: m_Offset.x
-      value: 0.00085401535
-      objectReference: {fileID: 0}
-    - target: {fileID: 70665932702804842, guid: 3d9fd4d3015497f4097486e55c0ab733,
-        type: 2}
-      propertyPath: m_Offset.y
-      value: -0.14615917
-      objectReference: {fileID: 0}
-    - target: {fileID: 70665932702804842, guid: 3d9fd4d3015497f4097486e55c0ab733,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 1.1674871
-      objectReference: {fileID: 0}
-    - target: {fileID: 70665932702804842, guid: 3d9fd4d3015497f4097486e55c0ab733,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 1.2686052
-      objectReference: {fileID: 0}
-    - target: {fileID: 70665932702804842, guid: 3d9fd4d3015497f4097486e55c0ab733,
-        type: 2}
-      propertyPath: m_Direction
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114741201986220154, guid: 3d9fd4d3015497f4097486e55c0ab733,
-        type: 2}
-      propertyPath: playerFeetCollider
-      value: 
-      objectReference: {fileID: 267349301}
-    - target: {fileID: 114741201986220154, guid: 3d9fd4d3015497f4097486e55c0ab733,
-        type: 2}
-      propertyPath: playerLowerBodyCollider
-      value: 
-      objectReference: {fileID: 267349296}
-    m_RemovedComponents:
-    - {fileID: 70911631169082568, guid: 3d9fd4d3015497f4097486e55c0ab733, type: 2}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d9fd4d3015497f4097486e55c0ab733, type: 2}
   m_IsPrefabAsset: 0
