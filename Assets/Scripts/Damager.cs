@@ -11,4 +11,12 @@ public class Damager : MonoBehaviour
             collision.collider.SendMessage("Kill");
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            other.SendMessage("Kill");
+        }
+    }
 }

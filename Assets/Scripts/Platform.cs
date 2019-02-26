@@ -17,12 +17,19 @@ public class Platform : MonoBehaviour
     public float movementSpeed;
 
     public List<Vector2> patrolPoints;
-    [Tooltip("When this is turned on the enemy will reverse back through the patrol points after reaching the last point.")]
+
+    [Tooltip("When this is turned on the platform will reverse back through the patrol points after reaching the last point.")]
     public bool Trace;
+
+    [Tooltip("When this is turned on the platform will pause after reaching each.")]
+    public bool PauseAtPoints = true;
+
+    public float PauseTime = 0.5f;
 
     private int patrolPointIndex = 0;
     private int playerCollidersInContact = 0;
     private int direction = 1;
+    private double timeSinceReachingPatrolPoint;
     private BoxCollider2D platformCollider;
 
     // Use this for initialization
@@ -82,23 +89,29 @@ public class Platform : MonoBehaviour
         // If we are at the destination, lets set the next destination
         if (Mathf.Abs(patrolPoints[patrolPointIndex].x - transform.position.x) < .1 && Mathf.Abs(patrolPoints[patrolPointIndex].y - transform.position.y) < .1)
         {
-            patrolPointIndex += direction;
+            timeSinceReachingPatrolPoint += Time.deltaTime;
 
-            // If we just arrived at the last point, start over
-            if (patrolPointIndex == patrolPoints.Count)
+            if (timeSinceReachingPatrolPoint >= .5)
             {
-                if (Trace)
+                timeSinceReachingPatrolPoint = 0;
+                patrolPointIndex += direction;
+
+                // If we just arrived at the last point, start over
+                if (patrolPointIndex == patrolPoints.Count)
                 {
-                    direction = -1;
+                    if (Trace)
+                    {
+                        direction = -1;
+                        patrolPointIndex += direction;
+                    }
+                    else
+                        patrolPointIndex = 0;
+                }
+                else if (patrolPointIndex == -1)
+                {
+                    direction = 1;
                     patrolPointIndex += direction;
                 }
-                else
-                    patrolPointIndex = 0;
-            }
-            else if (patrolPointIndex == -1)
-            {
-                direction = 1;
-                patrolPointIndex += direction;
             }
         }
     }
