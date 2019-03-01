@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Damager : MonoBehaviour
 {
+    [Tooltip("When enabled any trigger that touches a player will damage that player.")]
+    public bool triggerCollidersDamage = false;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Player")
@@ -14,7 +17,7 @@ public class Damager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (triggerCollidersDamage && other.tag == "Player")
         {
             other.SendMessage("Kill");
         }
