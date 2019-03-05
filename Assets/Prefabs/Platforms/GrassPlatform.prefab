@@ -192,7 +192,7 @@ MonoBehaviour:
   leftSprite: {fileID: 1591212102330520}
   middleSprite: {fileID: 1932883307493862}
   rightSprite: {fileID: 1206763040442696}
-  platformWidth: 2
+  platformWidth: 3
   movementSpeed: 3
   patrolPoints: []
   Trace: 0

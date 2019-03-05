@@ -196,6 +196,8 @@ MonoBehaviour:
   movementSpeed: 3
   patrolPoints: []
   Trace: 0
+  PauseAtPoints: 1
+  PauseTime: 0.5
 --- !u!212 &212135641124552906
 SpriteRenderer:
   m_ObjectHideFlags: 1
