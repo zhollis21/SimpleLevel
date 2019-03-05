@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public CapsuleCollider2D playerFeetCollider;
+    public PolygonCollider2D playerLowerBodyCollider;
 
     private Rigidbody2D rb2d;
-    private CapsuleCollider2D playerCollider;
-    private RaycastHit2D[] castCollisions;
+    private RaycastHit2D[] castFeetCollisions;
+    private RaycastHit2D[] castLowerBodyCollisions;
     private const int MOVEMENT_SPEED = 800;
     private const int MAX_VELOCITY = 7;
     private const int JUMP_FORCE = 650;
@@ -19,6 +21,7 @@ public class Player : MonoBehaviour
     private bool isAlive = true;
     private Actions currentAction;
     private float timeSinceLastJump;
+    private const int ARRAY_LENGTH = 10;
 
     private enum Actions { Standing, Walking, Jumping }
 
@@ -28,13 +31,13 @@ public class Player : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
         playerRenderer = GetComponent<SpriteRenderer>();
-        playerCollider = GetComponent<CapsuleCollider2D>();
         currentAction = Actions.Standing;
 
         Debug.Assert(rb2d != null, "Player Rigidbody2D is null.");
         Debug.Assert(playerAnimator != null, "Player Animator is null.");
         Debug.Assert(playerRenderer != null, "Player SpriteRenderer is null.");
-        Debug.Assert(playerCollider != null, "Player Capsule Collider 2D is null.");
+        Debug.Assert(playerFeetCollider != null, "Player Feet Collider 2D is null.");
+        Debug.Assert(playerLowerBodyCollider != null, "Player Lower Body Collider 2D is null.");
     }
 
     // Update is called once per frame
@@ -43,18 +46,28 @@ public class Player : MonoBehaviour
         if (!isAlive)
             return;
 
-        // Suprisingly this is the simplest way I could find to tell if we are on the ground
-        castCollisions = new RaycastHit2D[10];
-        playerCollider.Cast(Vector2.down, castCollisions, .1f);
-        for (int i = 0; i < castCollisions.Length; i++)
+        if (playerFeetCollider != null && playerLowerBodyCollider)
         {
-            if (castCollisions[i].collider != null && castCollisions[i].collider.tag == "Ground")
+            // Suprisingly this is the simplest way I could find to tell if we are on the ground
+            // We cast the foot collider down and then catch up to 10 things it hits
+            // If one of them have a tag of ground, then we know we are on or at least very close to the ground
+            castFeetCollisions = new RaycastHit2D[ARRAY_LENGTH];
+            playerFeetCollider.Cast(Vector2.down, castFeetCollisions, .05f);
+
+            castLowerBodyCollisions = new RaycastHit2D[ARRAY_LENGTH];
+            playerLowerBodyCollider.Cast(Vector2.down, castLowerBodyCollisions, .05f);
+
+            for (int i = 0; i < ARRAY_LENGTH; i++)
             {
-                isOnTheGround = true;
-                break;
+                if ((castFeetCollisions[i].collider != null && castFeetCollisions[i].collider.tag == "Ground") ||
+                    (castLowerBodyCollisions[i].collider != null && castLowerBodyCollisions[i].collider.tag == "Ground"))
+                {
+                    isOnTheGround = true;
+                    break;
+                }
+                else
+                    isOnTheGround = false;
             }
-            else
-                isOnTheGround = false;
         }
                 
         // Handle Horizontal Movement
@@ -97,7 +110,7 @@ public class Player : MonoBehaviour
             }
 
             if (isOnTheGround) // Stop the player from sliding on the ground
-                rb2d.velocity = Vector2.up * rb2d.velocity.y;
+                rb2d.velocity = Vector2.up * rb2d.velocity.y; // We still should hold onto vertical velocity
         }
         
         // Handle Vertical Movement
@@ -106,6 +119,10 @@ public class Player : MonoBehaviour
 
         if (jumpMovement > .5 && isOnTheGround && timeSinceLastJump > JUMP_COOLDOWN)
         {
+            // Erase any negative vertical velocity, but keep the horizontal velocity
+            if (rb2d.velocity.y < 0)
+                rb2d.velocity = Vector2.right * rb2d.velocity.x;
+
             rb2d.AddForce(Vector2.up * JUMP_FORCE);
             isOnTheGround = false;
             timeSinceLastJump = 0;

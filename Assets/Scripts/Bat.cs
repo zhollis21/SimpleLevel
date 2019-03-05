@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bat : DualDirectionEnemy
+public class Bat : DualAxisMovementEnemy
 {
+
+    public float maxChaseDistance;
 
     private Actions currentAction;
     private Vector3 originPoint;
@@ -23,8 +25,8 @@ public class Bat : DualDirectionEnemy
         // Bats currently only support chase
         if (enemyMovementType == MovementPattern.Chase)
         {
-            // Chasing the player
-            if (playerTransform != null)
+            // Chasing the player up to our max chase distance
+            if (playerTransform != null && Vector2.Distance(playerTransform.position, originPoint) <= maxChaseDistance)
             {
                 if (currentAction != Actions.Flying)
                 {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,8 +22,8 @@ public class GameManager : MonoBehaviour
 
     private const int CAMERA_RADIUS_VERTICAL = 10;
     private const int CAMERA_RADIUS_HORIZONTAL = 18;
-    private const int CAMERA_GRACE_HORIZONTAL = 7;
-    private const int CAMERA_GRACE_VERTICAL = 4;
+    private const int CAMERA_GRACE_HORIZONTAL = 5;
+    private const int CAMERA_GRACE_VERTICAL = 1;
     private int score;
 
     // This is called before all other start methods
@@ -75,6 +77,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void QuitToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     private void CheckForOutOfBounds()
     {
         // Reset the player if they go out of bounds
@@ -123,4 +130,40 @@ public class GameManager : MonoBehaviour
 
         mainCamera.transform.position = new Vector3(xPosition, yPosition, mainCamera.transform.position.z);
     }
+
+    /// <summary>
+    /// Takes the current state of the game and puts it into a save object. 
+    /// </summary>
+    /// <returns>A Save Object filled with current data.</returns>
+    private Save CreateSaveGameObject()
+    {
+        Save save = new Save();
+
+        save.money = score;
+
+        //intentionally not saving the player position so that the player cant save scum
+
+        //ToDo: Save which coins are collected so they cant be re-collected
+        //ToDo: Save how many levels the player has completed
+        //ToDo: Save how many lives the player has remaining?
+
+        return save;
+    }
+
+    public void SaveGame()
+    {
+        //Create the default save game 
+        Save save = CreateSaveGameObject();
+
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
+        bf.Serialize(file, save);
+        file.Close();
+
+        Debug.Log("Game Saved");
+    }
+
+    //ToDo: Implement Way to call the Save Game
+    //ToDo: Implement Load Game
+
 }
