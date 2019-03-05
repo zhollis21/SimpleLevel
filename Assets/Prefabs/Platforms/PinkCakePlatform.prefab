@@ -192,10 +192,12 @@ MonoBehaviour:
   leftSprite: {fileID: 1591212102330520}
   middleSprite: {fileID: 1932883307493862}
   rightSprite: {fileID: 1206763040442696}
-  platformWidth: 5
+  platformWidth: 3
   movementSpeed: 3
   patrolPoints: []
   Trace: 0
+  PauseAtPoints: 1
+  PauseTime: 0.5
 --- !u!212 &212135641124552906
 SpriteRenderer:
   m_ObjectHideFlags: 1
