@@ -11,6 +11,5 @@ public class LevelEntrance : MonoBehaviour
     public Direction right;
     public Direction left;
 
-    public List<Vector2> forwardDirections;
-    public List<Vector2> backwardDirections;
+    public List<Vector2> NextLevelDirections;
 }

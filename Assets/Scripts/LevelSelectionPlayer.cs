@@ -13,7 +13,7 @@ public class LevelSelectionPlayer : MonoBehaviour
     private bool IsMoving;
     private List<Vector2> movingDirections;
     private int movingIndex;
-    private const float MOVEMENT_SPEED = 40;
+    private const float MOVEMENT_SPEED = 60;
     private int direction;
 
     // Use this for initialization
@@ -58,7 +58,6 @@ public class LevelSelectionPlayer : MonoBehaviour
 
             if (movingIndex == -1)
             {
-                levelIndex--;
                 IsMoving = false;
             }
             else if (movingIndex == movingDirections.Count)
@@ -71,18 +70,23 @@ public class LevelSelectionPlayer : MonoBehaviour
 
     private void SetupMovement(LevelEntrance selectedLevel, LevelEntrance.Direction directionOfMovement)
     {
-        if (directionOfMovement == LevelEntrance.Direction.Forward)
+        if (directionOfMovement == LevelEntrance.Direction.Forward && selectedLevel != null && selectedLevel.NextLevelDirections.Count > 0)
         {
-            movingDirections = selectedLevel.forwardDirections;
+            movingDirections = selectedLevel.NextLevelDirections;
             direction = 1;
             movingIndex = 0;
+
+            IsMoving = true;
         }
-        else
+        else if (directionOfMovement == LevelEntrance.Direction.Backward && levelIndex > 0 && levelIndex <= levels.Count && levels[levelIndex - 1].NextLevelDirections.Count > 0)
         {
-            movingDirections = selectedLevel.backwardDirections;
+            levelIndex--;
+            selectedLevel = levels[levelIndex];
+            movingDirections = selectedLevel.NextLevelDirections;
             direction = -1;
             movingIndex = movingDirections.Count - 1;
+
+            IsMoving = true;
         }
-        IsMoving = true;
     }
 }

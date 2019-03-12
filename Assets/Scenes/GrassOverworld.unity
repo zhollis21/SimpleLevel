@@ -367,8 +367,7 @@ MonoBehaviour:
   down: 0
   right: 0
   left: 1
-  forwardDirections: []
-  backwardDirections: []
+  NextLevelDirections: []
 --- !u!1 &885268146
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,8 +453,7 @@ MonoBehaviour:
   down: 2
   right: 0
   left: 1
-  forwardDirections: []
-  backwardDirections: []
+  NextLevelDirections: []
 --- !u!1 &1434296733
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,8 +539,7 @@ MonoBehaviour:
   down: 2
   right: 2
   left: 1
-  forwardDirections: []
-  backwardDirections: []
+  NextLevelDirections: []
 --- !u!1 &1573529019
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,12 +687,11 @@ MonoBehaviour:
   down: 0
   right: 0
   left: 2
-  forwardDirections:
+  NextLevelDirections:
   - {x: -315, y: 141}
   - {x: -315, y: 18}
   - {x: -243, y: 18}
-  - {x: -243, y: -39}
-  backwardDirections: []
+  - {x: -243, y: -37}
 --- !u!1 &1702951313
 GameObject:
   m_ObjectHideFlags: 0
@@ -976,8 +972,4 @@ MonoBehaviour:
   down: 0
   right: 0
   left: 1
-  forwardDirections:
-  - {x: -243, y: -39}
-  - {x: -243, y: -86}
-  - {x: -72, y: -86}
-  backwardDirections: []
+  NextLevelDirections: []
