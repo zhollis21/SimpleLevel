@@ -12,4 +12,6 @@ public class LevelEntrance : MonoBehaviour
     public Direction left;
 
     public List<Vector2> NextLevelDirections;
+    public bool IsWorldTransition;
+    public string sceneName;
 }

@@ -11,7 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 6c8f59d8347e4bc49bc6105737febac7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Zach's Scene.unity
     guid: ac0e36f4a394ef04690d1031cb82ab55
+  - enabled: 1
+    path: Assets/Scenes/GrassOverworld.unity
+    guid: 12b5e0199091ba84883027d25b49bdc7
+  - enabled: 1
+    path: Assets/Scenes/GrassWorld_Level4.unity
+    guid: 98f6082554d4a2e4783bc8b0ffe589bf
   m_configObjects: {}

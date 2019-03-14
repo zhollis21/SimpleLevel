@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelSelectionPlayer : MonoBehaviour
 {
@@ -25,12 +26,19 @@ public class LevelSelectionPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (levelIndex < 0 || levelIndex >= levels.Count)
+            return;
+
         LevelEntrance selectedLevel = levels[levelIndex];
 
         if (!IsMoving)
         {
             float verticalInput = Input.GetAxis("Vertical");
             float horizontalInput = Input.GetAxis("Horizontal");
+            float spacebarInput = Input.GetAxis("Jump");
+
+            if (spacebarInput > .5 && !string.IsNullOrEmpty(selectedLevel.sceneName))
+                SceneManager.LoadScene(selectedLevel.sceneName);
 
             if (verticalInput > BUTTON_FORCE && selectedLevel.up != LevelEntrance.Direction.None)
             {
@@ -59,11 +67,17 @@ public class LevelSelectionPlayer : MonoBehaviour
             if (movingIndex == -1)
             {
                 IsMoving = false;
+
+                if (selectedLevel.IsWorldTransition)
+                    SceneManager.LoadScene(selectedLevel.sceneName);
             }
             else if (movingIndex == movingDirections.Count)
             {
                 levelIndex++;
                 IsMoving = false;
+
+                if (levels[levelIndex].IsWorldTransition)
+                    SceneManager.LoadScene(levels[levelIndex].sceneName);
             }
         }
     }
