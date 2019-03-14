@@ -5,7 +5,7 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
 
-    public int value;
+    public int coinID;
     private bool collected = false;
 
     // When the player enters the collider of the coin, we send a score update and destroy the coin.
@@ -13,7 +13,7 @@ public class Coin : MonoBehaviour
     {
         if (!collected && collision.tag == "Player")
         {
-            GameManager.instance.AddToScore(value);
+            GameManager.instance.CoinCollected(coinID);
             collected = true;
             Destroy(gameObject);
         }
