@@ -16,7 +16,8 @@ public class GameManager : MonoBehaviour
     public int stageBottom;
     public int stageLeft;
     public int stageRight;
-    public Text scoreText;
+    public Text deathCountText;
+    public Text timePlayedText;
     public Transform playerTransform;
     public Vector2 playerSpawnPoint;
 
@@ -24,7 +25,7 @@ public class GameManager : MonoBehaviour
     private const int CAMERA_RADIUS_HORIZONTAL = 18;
     private const int CAMERA_GRACE_HORIZONTAL = 5;
     private const int CAMERA_GRACE_VERTICAL = 1;
-    private int score;
+    private int deathCount;
 
     // This is called before all other start methods
     private void Awake()
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
     // LateUpdate is called once per frame, after all Update functions
     void LateUpdate()
     {
+        timePlayedText.text = "Time: " + Time.timeSinceLevelLoad.ToString("N2");
         CheckForOutOfBounds();
         SetCameraPosition();
     }
@@ -54,22 +56,17 @@ public class GameManager : MonoBehaviour
         playerSpawnPoint = point;
     }
 
-    public void AddToScore(int amount)
+    public void CoinCollected(int coinID)
     {
-        score += amount;
-        scoreText.text = "Score: " + score;
+        // ToDo: Save the gathered coin in a file
     }
 
     public void RevivePlayer()
     {
         playerTransform.position = playerSpawnPoint;
 
-        // Take away a point for saving them
-        if (score > 0)
-        {
-            score--;
-            scoreText.text = "Score: " + score;
-        }
+        deathCount++;
+        deathCountText.text = "Deaths: " + deathCount;
     }
 
     public void RestartLevel()
@@ -138,9 +135,7 @@ public class GameManager : MonoBehaviour
     private Save CreateSaveGameObject()
     {
         Save save = new Save();
-
-        save.money = score;
-
+        
         //intentionally not saving the player position so that the player cant save scum
 
         //ToDo: Save which coins are collected so they cant be re-collected
