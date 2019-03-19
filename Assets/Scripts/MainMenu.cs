@@ -20,17 +20,18 @@ public class MainMenu : MonoBehaviour
 
     public void StartGameClicked()
     {
-        //ToDo: Replace with Level 1
-        SceneManager.LoadScene("Zach's Scene");
+        // ToDo: Create a new save file or wipe the old one
+        SceneManager.LoadScene("GrassOverworld");
     }
 
-    public void LevelSelectionClicked()
+    public void LoadGameClicked()
     {
-        //ToDo: Create Level Selction Menu
+        // ToDo: Load their game stats
+        SceneManager.LoadScene("GrassOverworld");
     }
 
-    public void OptionsClicked()
+    public void QuitGameClicked()
     {
-        //ToDo: Create Options
+        Application.Quit();
     }
 }
