@@ -14,7 +14,7 @@ public class LevelSelectionPlayer : MonoBehaviour
     private bool IsMoving;
     private List<Vector2> movingDirections;
     private int movingIndex;
-    private const float MOVEMENT_SPEED = 60;
+    private const float MOVEMENT_SPEED = 70;
     private int direction;
 
     // Use this for initialization
