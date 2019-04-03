@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public Text timePlayedText;
     public Transform playerTransform;
     public Vector2 playerSpawnPoint;
+    public string overworldScene;
 
     private const int CAMERA_RADIUS_VERTICAL = 10;
     private const int CAMERA_RADIUS_HORIZONTAL = 18;
@@ -76,7 +77,7 @@ public class GameManager : MonoBehaviour
 
     public void QuitToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(overworldScene);
     }
 
     private void CheckForOutOfBounds()

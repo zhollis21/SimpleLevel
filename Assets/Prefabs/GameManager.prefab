@@ -133,6 +133,8 @@ MonoBehaviour:
   stageBottom: -15
   stageLeft: -100
   stageRight: 100
-  scoreText: {fileID: 0}
+  deathCountText: {fileID: 0}
+  timePlayedText: {fileID: 0}
   playerTransform: {fileID: 0}
   playerSpawnPoint: {x: 0, y: 0}
+  overworldScene: GrassOverworld
