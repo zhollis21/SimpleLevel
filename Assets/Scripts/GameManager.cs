@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -8,7 +6,6 @@ using System.IO;
 
 public class GameManager : MonoBehaviour
 {
-
     // Game Management is normally handled singleton style
     public static GameManager instance;
 
@@ -161,5 +158,4 @@ public class GameManager : MonoBehaviour
 
     //ToDo: Implement Way to call the Save Game
     //ToDo: Implement Load Game
-
 }
