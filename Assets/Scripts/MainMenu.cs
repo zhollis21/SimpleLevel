@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
     public void StartGameClicked()
     {
         // ToDo: Create a new save file or wipe the old one
-        SceneManager.LoadScene("GrassOverworld");
+        SceneManager.LoadScene("GrassLevel1");
     }
 
     public void LoadGameClicked()

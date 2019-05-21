@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
 
     public void QuitToMainMenu()
     {
-        SceneManager.LoadScene(overworldScene);
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void CheckForOutOfBounds()

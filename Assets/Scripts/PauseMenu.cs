@@ -47,11 +47,13 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
+        Time.timeScale = 1;
         GameManager.instance.RestartLevel();
     }
 
     public void Menu()
     {
+        Time.timeScale = 1;
         GameManager.instance.QuitToMainMenu();
     }
 }
